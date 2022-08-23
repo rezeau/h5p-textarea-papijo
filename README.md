@@ -1,8 +1,8 @@
-H5P Advanced Text
-==========
+H5P Textarea papi Jo
+====================
 
-A simple library for displaying text with advanced styling.
-Useful when the editor dynamially add texts to other content.
+A simple library for entering raw text in a textarea.
+Will accept and correctly display text formatted in an external editor.
 
 ## License
 
