@@ -9,22 +9,22 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
    * @param {number} id
    */
   function Textarea(parameters, id) {
-    var self = this;
+    const self = this;
     EventDispatcher.call(this);
 
     // If text was copied-pasted from another WYSIWYG editor we must clean extra line breaks and NOT CLEANED!
     if (parameters.removeExtraLineBreaks) {
       //This javascript code replaces all 3 types of line breaks with a single space
-      parameters.text = parameters.text.replace(/(\r\n|\n|\r)/gm," ") 
+      parameters.text = parameters.text.replace(/(\r\n|\n|\r)/gm, " ") ;
       //Replace all double white spaces with single spaces
-      parameters.text = parameters.text.replace(/\s+/g," ");
+      parameters.text = parameters.text.replace(/\s+/g, " ");
     }
     // Now deal with cleaned text at https://www.textfixer.com/tools/remove-line-breaks.php
-    parameters.text = parameters.text.replace(/(\r\n|\n|\r)/gm,"<br>") 
-    
+    parameters.text = parameters.text.replace(/(\r\n|\n|\r)/gm, "<br>");
+
     //Allow some html tags.
-    parameters.text = parameters.text.replace(/&lt;/g, '\<').replace(/&gt;/g, '\>').replace(/&quot;/g, '');
-    var html = (parameters.text === undefined ? '<em>New text</em>' : parameters.text);
+    parameters.text = parameters.text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '');
+    const html = (parameters.text === undefined ? '<em>New text</em>' : parameters.text);
 
     /**
      * Wipe container and add text html.
