@@ -23,7 +23,7 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
     parameters.text = parameters.text.replace(/(\r\n|\n|\r)/gm, "<br>");
 
     //Allow some html tags.
-    parameters.text = parameters.text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '');
+    parameters.text = parameters.text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
     const html = (parameters.text === undefined ? '<em>New text</em>' : parameters.text);
 
     /**
