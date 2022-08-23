@@ -1,0 +1,76 @@
+.h5p-textarea-pj {
+  font-size: 16px;
+  line-height: 1.5em;
+  font-family: Sans-Serif;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.h5p-textarea-pj .marker {
+  color: black;
+}
+
+.h5p-textarea-pj table,
+.h5p-textarea-pj td {
+  background: #ebebeb54;
+}
+
+.h5p-textarea-pj td {
+  vertical-align: top;
+}
+/*
+.h5p-textarea-pj ul,
+.h5p-textarea-pj ol {
+  padding: 0;
+  margin: 1em 0;
+}
+.h5p-textarea-pj ul > li,
+.h5p-textarea-pj ol > li {
+  margin: 0 0 1em 1.5em;
+  padding: 0;
+}
+
+.h5p-textarea-pj ul > li:last-child,
+.h5p-textarea-pj ol > li:last-child {
+  margin-bottom: 0;
+}
+.h5p-textarea-pj ul > li {
+  list-style-type: circle;
+}
+.h5p-textarea-pj ol > li {
+  list-style-type: decimal;
+}
+.h5p-textarea-pj.h5p-frame {
+  margin: 1em;
+}
+*/
+/* See https://www.w3docs.com/snippets/css/how-to-change-the-style-of-the-title-attribute-inside-an-anchor-tag.html# */
+.h5p-textarea-pj a.tooltip {
+  border-bottom: 1px dashed;
+  text-decoration: none;
+}
+.h5p-textarea-pj a.tooltip:hover {
+  cursor: help;
+  position: relative;
+}
+.h5p-textarea-pj a.tooltip span {
+  display: none;
+}
+.h5p-textarea-pj a.tooltip:hover span {
+  border: #666 2px dotted;
+  padding: 5px 20px 5px 5px;
+  display: block;
+  z-index: 100;
+  background: #e3e3e3;
+  left: 0px;
+  margin: 15px;
+  width: max-content;
+  position: absolute;
+  top: 15px;
+  text-decoration: none;
+  width: max-content;
+  min-width: 50px;
+  max-width: 400px;
+  color: initial;
+}
