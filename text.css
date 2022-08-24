@@ -11,6 +11,12 @@
   color: black;
 }
 
+.h5p-textarea-pj h1,
+.h5p-textarea-pj h2,
+.h5p-textarea-pj h3{
+  line-height: initial;
+}
+
 .h5p-textarea-pj table,
 .h5p-textarea-pj td {
   background: #ebebeb54;
@@ -19,33 +25,9 @@
 .h5p-textarea-pj td {
   vertical-align: top;
 }
-/*
-.h5p-textarea-pj ul,
-.h5p-textarea-pj ol {
-  padding: 0;
-  margin: 1em 0;
-}
-.h5p-textarea-pj ul > li,
-.h5p-textarea-pj ol > li {
-  margin: 0 0 1em 1.5em;
-  padding: 0;
-}
 
-.h5p-textarea-pj ul > li:last-child,
-.h5p-textarea-pj ol > li:last-child {
-  margin-bottom: 0;
-}
-.h5p-textarea-pj ul > li {
-  list-style-type: circle;
-}
-.h5p-textarea-pj ol > li {
-  list-style-type: decimal;
-}
-.h5p-textarea-pj.h5p-frame {
-  margin: 1em;
-}
-*/
 /* See https://www.w3docs.com/snippets/css/how-to-change-the-style-of-the-title-attribute-inside-an-anchor-tag.html# */
+/* Modified to accept the var styling of the tooltip */
 .h5p-textarea-pj a.tooltip {
   border-bottom: 1px dashed;
   text-decoration: none;
@@ -54,10 +36,12 @@
   cursor: help;
   position: relative;
 }
-.h5p-textarea-pj a.tooltip span {
+.h5p-textarea-pj a.tooltip span,
+.h5p-textarea-pj a.tooltip var {
   display: none;
 }
-.h5p-textarea-pj a.tooltip:hover span {
+.h5p-textarea-pj a.tooltip:hover span,
+.h5p-textarea-pj a.tooltip:hover var {
   border: #666 2px dotted;
   padding: 5px 20px 5px 5px;
   display: block;
