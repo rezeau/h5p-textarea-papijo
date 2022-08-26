@@ -13,25 +13,28 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
     EventDispatcher.call(this);
     parameters.tipLabel = "Show tip";
     let text = parameters.text;
-    // If text was copied-pasted from another WYSIWYG editor we must clean extra line breaks and NOT CLEANED!
-    if (parameters.removeExtraLineBreaks) {
+    // If paragraph marks in text, remove them all!
+    if ((text.indexOf('&lt;p&gt;') > -1)) {
       //This javascript code replaces all 3 types of line breaks with a single space
-      text = text.replace(/(\r\n|\n|\r)/gm, " ") ;
+      text = text.replace(/(\r\n|\n|\r)/gm, "") ;
       //Replace all double white spaces with single spaces
       text = text.replace(/\s+/g, " ");
     }
-    // Now deal with cleaned text at https://www.textfixer.com/tools/remove-line-breaks.php
     text = text.replace(/(\r\n|\n|\r)/gm, "<br>");
+    // Definitely remove all paragraph tags.
+    text = text.replace(/&lt;\/p&gt;/g, '<br>');
+    text = text.replace(/&lt;p&gt;/g, '');
 
     //Allow some html tags.
     text = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+
     const DUMMYCHARACTER = '\u200B'; // zero-width space character
     const parseText = text.split(/(\*.*?\*)/);
     self.attach = function ($container) {
       $container.addClass('h5p-textarea-pj');
       parseText
         .forEach(function (part) {
-          if ((part.substr(0, 1) === '*') && (part.substr(-1) === '*') && (part.indexOf(':') > -1)) {
+          if ((part.substr(0, 1) === '*') && (part.substr(-1) === '*')) {
             // word has tip
             let tip = part.match(/(:([^\\*]+))/g);
             if (tip) {
@@ -54,8 +57,6 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
           }
           else {
             // is normal text
-            const el = document.createElement('span');
-            el.innerHTML = text;
             $container.append(part);
           }
         });
