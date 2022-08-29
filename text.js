@@ -11,19 +11,13 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
   function Textarea(parameters, id) {
     const self = this;
     EventDispatcher.call(this);
-    parameters.tipLabel = "Show tip";
     let text = parameters.text;
-    // If paragraph marks in text, remove them all!
-    if ((text.indexOf('&lt;p&gt;') > -1)) {
-      //This javascript code replaces all 3 types of line breaks with a single space
-      text = text.replace(/(\r\n|\n|\r)/gm, "") ;
-      //Replace all double white spaces with single spaces
-      text = text.replace(/\s+/g, " ");
+
+    if (parameters.removeExtraLineBreaks) {
+      text = text.replace(/(\r\n|\n|\r)/gm, "");
+    } else {
+      text = text.replace(/(\r\n|\n|\r)/gm, "<br />");
     }
-    text = text.replace(/(\r\n|\n|\r)/gm, "<br>");
-    // Definitely remove all paragraph tags.
-    text = text.replace(/&lt;\/p&gt;/g, '<br>');
-    text = text.replace(/&lt;p&gt;/g, '');
 
     //Allow some html tags.
     text = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
@@ -41,12 +35,12 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
               let partLen = part.length;
               tip = tip[0].replace(':', '');
               // If tip only contains a reference to an image, needs some character, so we add an invisible one.
-              if ((tip.substr(0, 4) === '<img')) {
-                tip = tip.replace('<img', DUMMYCHARACTER + '​<img');
-                partLen = partLen + 2;
+              if ((tip.substr(0, 1) === '<')) {
+                tip = DUMMYCHARACTER + tip;
+                partLen = partLen + 1;
               }
               let word = part.slice(1, partLen - tip.length - 2);
-              word = '<em>' + word + '</em>';
+              word = '<span class="text-with-tip">' + word + '</span>';
               $container.append(word);
               self.$tip = H5P.JoubelUI.createTip(tip, {
                 tipLabel: parameters.tipLabel,

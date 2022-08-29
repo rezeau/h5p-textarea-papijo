@@ -35,3 +35,16 @@
   font-size: 0.9em;
   cursor: help;
 }
+
+.h5p-textarea-pj [class^="joubel-icon-"] {
+  line-height: 0em;
+  height:25px;
+}
+
+.h5p-textarea-pj .text-with-tip {
+  text-decoration-line: underline overline;
+}
+
+.joubel-speech-bubble-text .image {
+  text-align: center!important;
+}
