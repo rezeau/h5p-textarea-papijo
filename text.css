@@ -41,10 +41,14 @@
   height:25px;
 }
 
-.h5p-textarea-pj .text-with-tip {
-  text-decoration-line: underline overline;
+.h5p-textarea-pj .text-with-tip-underline {
+  text-decoration-line: underline;
 }
 
 .joubel-speech-bubble-text .image {
   text-align: center!important;
+}
+
+.joubel-icon-tip-normal .h5p-icon-speech-bubble::before {
+  color: inherit;
 }
