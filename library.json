@@ -9,12 +9,18 @@
   "author": "Papi Jo",
   "preloadedJs": [
     {
+      "path": "joubel-tip-papijo.js"
+    },
+    {
       "path": "text.js"
     }
   ],
   "preloadedCss": [
     {
       "path": "text.css"
+    },
+    {
+      "path": "joubel-tip-papijo.css"
     }
   ],
   "metadataSettings": {

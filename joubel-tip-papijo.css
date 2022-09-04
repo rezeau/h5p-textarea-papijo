@@ -1,0 +1,4 @@
+/* Just hide the bubble icon */
+.h5p-textarea-pj .joubel-icon-tip-normal .h5p-icon-speech-bubble::before {
+  visibility: hidden;
+}

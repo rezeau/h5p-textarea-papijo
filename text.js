@@ -18,12 +18,19 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
     } else {
       text = text.replace(/(\r\n|\n|\r)/gm, "<br />");
     }
-
     //Allow some html tags.
     text = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
-
+    
+    // If tips detected remove the paragraphs which might include tips.
+    const regex = /(\*.*?:.*?\*)/gm;
+    if (regex.exec(text) !== null) {
+      text = text.replace(/<\/p>/g, '');
+      text = text.replace(/<p>/g, '<p></p>');
+    }
+    
     const DUMMYCHARACTER = '\u200B'; // zero-width space character
     const parseText = text.split(/(\*.*?\*)/);
+
     self.attach = function ($container) {
       $container.addClass('h5p-textarea-pj');
       parseText
@@ -40,9 +47,10 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
                 partLen = partLen + 1;
               }
               let word = part.slice(1, partLen - tip.length - 2);
+              let wordLen = getWidthOfText(word, 'Sans-Serif', '16px');
               word = '<span class="text-with-tip-underline">' + word + '</span>';
               $container.append(word);
-              self.$tip = H5P.JoubelUI.createTip(tip, {
+              self.$tip = H5P.JoubelUI.createTip(tip, wordLen, {
                 tipLabel: parameters.tipLabel,
                 tabcontrol: true
               });
@@ -53,10 +61,22 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
             // is normal text
             $container.append(part);
           }
+         
         });
-
+        
     };
 
+  }
+  /* see https://stackoverflow.com/questions/2057682/determine-pixel-length-of-string-in-javascript-jquery */
+  function getWidthOfText(txt, fontname, fontsize){
+    if(getWidthOfText.c === undefined){
+        getWidthOfText.c=document.createElement('canvas');
+        getWidthOfText.ctx=getWidthOfText.c.getContext('2d');
+    }
+    var fontspec = fontsize + ' ' + fontname;
+    if(getWidthOfText.ctx.font !== fontspec)
+        getWidthOfText.ctx.font = fontspec;
+    return getWidthOfText.ctx.measureText(txt).width;
   }
 
   Textarea.prototype = Object.create(EventDispatcher.prototype);
