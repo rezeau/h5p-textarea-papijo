@@ -12,6 +12,9 @@
       "path": "joubel-tip-papijo.js"
     },
     {
+      "path": "joubel-speech-bubble-papijo.js"
+    },
+    {
       "path": "text.js"
     }
   ],
@@ -20,18 +23,21 @@
       "path": "text.css"
     },
     {
+      "path": "joubel-speech-bubble-papijo.css"
+    },
+    {
       "path": "joubel-tip-papijo.css"
     }
   ],
-  "metadataSettings": {
-    "disable": 0,
-    "disableExtraTitleField": 1
-  },
   "preloadedDependencies": [
     {
       "machineName": "H5P.JoubelUI",
       "majorVersion": 1,
       "minorVersion": 3
     }
-  ]
+  ],
+  "metadataSettings": {
+    "disable": 0,
+    "disableExtraTitleField": 0
+  }
 }

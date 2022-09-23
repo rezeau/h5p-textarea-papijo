@@ -50,7 +50,7 @@ H5P.TextareaPapiJo = (function ($, EventDispatcher) {
               let wordLen = getWidthOfText(word, 'Sans-Serif', '16px');
               word = '<span class="text-with-tip-underline">' + word + '</span>';
               $container.append(word);
-              self.$tip = H5P.JoubelUI.createTip(tip, wordLen, {
+              self.$tip = H5P.JoubelTipPapiJo(tip, wordLen, true, {
                 tipLabel: parameters.tipLabel,
                 tabcontrol: true
               });

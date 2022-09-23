@@ -1,4 +1,4 @@
-H5P.JoubelTip = (function ($) {
+H5P.JoubelTipPapiJo = (function ($) {
   var $conv = $('<div/>');
 
   /**
@@ -15,17 +15,40 @@ H5P.JoubelTip = (function ($) {
    * @param {boolean} [behaviour.tabcontrol] Set to 'true' if you plan on controlling the tabindex in the parent (tabindex="-1")
    * @return {H5P.jQuery|undefined} Tip button jQuery element or 'undefined' if invalid tip
    */
-  function JoubelTip(tipHtml, wordLen, behaviour) {
-
+  function JoubelTipPapiJo(tipHtml, wordLen, behaviour) {
     // Keep track of the popup that appears when you click the Tip button
     var speechBubble;
+    // Check if tipHtml contains (at least) one image.
+    let imgLen;
+    const regex = /(.?><img\s+)src="(.*?)"|width="(.*?)"|height="(.*?)">/gi;
+    let m;
+    while ((m = regex.exec(tipHtml)) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }        
+        // The result can be accessed through the `m`-variable.
+        m.forEach((match, groupIndex) => {
+          if (groupIndex === 3) {
+            imgLen = match;
+          }
+        });
+    }
 
     // Parse tip html to determine text
     var tipText = $conv.html(tipHtml).text().trim();
     if (tipText === '') {
       return; // The tip has no textual content, i.e. it's invalid.
     }
-
+    
+    let tipTextLen = getWidthOfText(tipText, 'Sans-Serif', '16px');
+    if (imgLen !== undefined) {
+      imgLen = Number(imgLen);
+      tipTextLen = Math.max(imgLen, tipTextLen);
+    }
+    tipTextLen += 25; // To compensate for tooltip margins.
+    tipTextLen = Math.min(400, tipTextLen); // Limit tipTextLen to default maxWidth (400).
+    
     // Set default behaviour
     behaviour = $.extend({
       tipLabel: tipText,
@@ -94,7 +117,7 @@ H5P.JoubelTip = (function ($) {
       }
       else if (force !== false && behaviour.showSpeechBubble) {
         // Create and show new popup
-        speechBubble = H5P.JoubelSpeechBubble($tipButton, tipHtml);
+        speechBubble = H5P.JoubelSpeechBubble($tipButton, tipHtml, tipTextLen);
         $tipButton.attr('aria-expanded', true);
         $tipAnnouncer.html(tipHtml);
       }
@@ -102,6 +125,18 @@ H5P.JoubelTip = (function ($) {
 
     return $tipButton;
   }
+  
+  /* see https://stackoverflow.com/questions/2057682/determine-pixel-length-of-string-in-javascript-jquery */
+  function getWidthOfText(txt, fontname, fontsize){
+    if(getWidthOfText.c === undefined){
+        getWidthOfText.c=document.createElement('canvas');
+        getWidthOfText.ctx=getWidthOfText.c.getContext('2d');
+    }
+    var fontspec = fontsize + ' ' + fontname;
+    if(getWidthOfText.ctx.font !== fontspec)
+        getWidthOfText.ctx.font = fontspec;
+    return getWidthOfText.ctx.measureText(txt).width;
+  }
 
-  return JoubelTip;
+  return JoubelTipPapiJo;
 })(H5P.jQuery);
